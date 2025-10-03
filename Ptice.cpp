@@ -1,54 +1,33 @@
+//*https://programming.in.th/tasks/0016
 #include <bits/stdc++.h>
-
 using namespace std;
-int main() {
-  int n, temp = 0, temp2 = 0;
-  int c1[3] = {0,0,0};
-  int c2[4] = {0,0,0,0};
-  int c3[6] = {0,0,0,0,0,0};
-  string s;
-  cin >> n >> s;
-  string a = {"ABC"}, b = {"BABC"}, g = {"CCAABB"};
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < n; j++) {
-      temp = j + i;
-      temp2 = temp % 3;
-      if (s[j] == a[temp2]) {
-        c1[i]++;
-      }
+
+int main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    int maxA = 0 , maxB = 0 , maxG = 0 , n;
+    string s , A = "ABC" , B = "BABC" , G = "CCAABB";
+    cin >> n >> s;
+    for(int i = 0; i < n; i++){
+        if(s[i] == A[i%3]){
+            maxA++;
+        }
+        if(s[i] == B[i%4]){
+            maxB++;
+        }
+        if(s[i] == G[i%6]){
+            maxG++;
+        }
     }
-  }
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < n; j++) {
-      temp = j + i;
-      temp2 = temp % 4;
-      if (s[j] == b[temp2]) {
-        c2[i]++;
-      }
+    int maxpos = max({maxA , maxB , maxG});
+    cout << maxpos << endl;
+    if(maxpos == maxA){
+        cout << "Adrian" << endl;
     }
-  }
-  for (int i = 0; i < 6; i++) {
-    for (int j = 0; j < n; j++) {
-      temp = j + i;
-      temp2 = temp % 6;
-      if (s[j] == g[temp2]) {
-        c3[i]++;
-      }
+    if(maxpos == maxB){
+        cout << "Bruno" << endl;
     }
-  }
-  sort(c1, c1 + 3);
-  sort(c2, c2 + 4);
-  sort(c3, c3 + 6);
-  int h[3] = {c1[2],c2[3],c3[5]};
-  sort(h, h + 3);
-  cout << h[2] << endl;
-  if (h[2] == c1[2]) {
-    cout << "Adrian" << endl;
-  }
-  if (h[2] == c2[3]) {
-    cout << "Bruno" << endl;
-  }
-  if (h[2] == c3[5]) {
-    cout << "Goran" << endl;
-  }
+    if(maxpos == maxG){
+        cout << "Goran" << endl;
+    }
 }
